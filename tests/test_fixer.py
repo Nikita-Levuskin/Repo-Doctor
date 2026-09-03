@@ -2,6 +2,8 @@ from __future__ import annotations
 
 from pathlib import Path
 
+import pytest
+
 from repo_doctor.fixer import apply_fixes
 from repo_doctor.models import RepoDoctorConfig
 from repo_doctor.scanner import scan_repository
@@ -50,7 +52,12 @@ def test_existing_content_is_preserved(tmp_path: Path) -> None:
 def test_symlinked_parent_is_rejected(tmp_path: Path) -> None:
     outside = tmp_path.parent / f"{tmp_path.name}-outside-dir"
     outside.mkdir()
-    (tmp_path / ".github").symlink_to(outside, target_is_directory=True)
+    link = tmp_path / ".github"
+    try:
+        link.symlink_to(outside, target_is_directory=True)
+    except (NotImplementedError, OSError) as exc:
+        outside.rmdir()
+        pytest.skip(f"directory symlinks are unavailable: {exc}")
     try:
         config = RepoDoctorConfig()
         report = scan_repository(tmp_path, config)
@@ -61,5 +68,5 @@ def test_symlinked_parent_is_rejected(tmp_path: Path) -> None:
         else:
             raise AssertionError("symlinked generation path was not rejected")
     finally:
-        (tmp_path / ".github").unlink()
+        link.unlink(missing_ok=True)
         outside.rmdir()

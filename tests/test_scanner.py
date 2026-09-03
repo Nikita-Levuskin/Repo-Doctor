@@ -103,11 +103,16 @@ def test_symlink_is_not_followed_for_secret_scan(tmp_path: Path) -> None:
     outside = tmp_path.parent / f"{tmp_path.name}-outside-secret.txt"
     outside.write_text("token=abcdefghijklmnopqrstuvwxyz")
     link = tmp_path / "linked-secret.txt"
-    link.symlink_to(outside)
+    try:
+        link.symlink_to(outside)
+    except (NotImplementedError, OSError) as exc:
+        outside.unlink(missing_ok=True)
+        pytest.skip(f"file symlinks are unavailable: {exc}")
     try:
         report = scan_repository(tmp_path, RepoDoctorConfig())
         assert not any(item.path == link.name for item in report.violations)
     finally:
+        link.unlink(missing_ok=True)
         outside.unlink(missing_ok=True)
 
 
