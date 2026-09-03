@@ -30,6 +30,8 @@ repo-doctor fix work/demo-run --apply
 - package build: PASS, sdist и универсальный wheel `py3-none-any`.
 - metadata check: PASS для sdist и wheel.
 - clean install: PASS, оба entry point вывели `1.0.0`.
+- GitHub Actions: PASS, [run 33746025570](https://github.com/Nikita-Levuskin/Repo-Doctor/actions/runs/33746025570);
+  тесты и установка wheel подтверждены на Linux, macOS и Windows.
 - demo: PASS, 5 исходных нарушений; dry-run без записи; 5 созданных файлов; чистый scan;
   повторный apply — `[]`.
 
@@ -37,8 +39,6 @@ repo-doctor fix work/demo-run --apply
 
 - Реальный PR/MR не создавался.
 - GitHub/GitLab проверены mock-тестами, но не тестовым аккаунтом.
-- Фактические Windows/Linux-прогоны выполняются workflow `CI`; локальная проверка
-  выполнена на macOS.
 - Окончательное соответствие методичке невозможно проверить без методички.
 
 ## Три прохода контроля
