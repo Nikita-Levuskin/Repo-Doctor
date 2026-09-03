@@ -37,16 +37,16 @@ def test_apply_is_idempotent(tmp_path: Path) -> None:
     assert any(item.status == "created" for item in first)
     assert second == []
     assert snapshots == after
-    assert "Sample Project" in (tmp_path / "README.md").read_text()
+    assert "Sample Project" in (tmp_path / "README.md").read_text(encoding="utf-8")
 
 
 def test_existing_content_is_preserved(tmp_path: Path) -> None:
     readme = tmp_path / "README.md"
-    readme.write_text("do not overwrite")
+    readme.write_text("do not overwrite", encoding="utf-8")
     config = RepoDoctorConfig()
     report = scan_repository(tmp_path, config)
     apply_fixes(tmp_path, report, config, apply=True)
-    assert readme.read_text() == "do not overwrite"
+    assert readme.read_text(encoding="utf-8") == "do not overwrite"
 
 
 def test_symlinked_parent_is_rejected(tmp_path: Path) -> None:
