@@ -1,0 +1,27 @@
+version: 1
+scan:
+  max_file_size: 1048576
+  exclude: [.git, .venv, node_modules]
+templates:
+  project_name: Repo Doctor demonstration
+  license_holder: Nikita Levushkin
+  python_package: demo
+rules:
+  required-readme:
+    enabled: true
+    severity: error
+  required-license:
+    enabled: true
+  required-gitignore:
+    enabled: true
+  required-manifest:
+    enabled: true
+  required-ci:
+    enabled: true
+    severity: warning
+  forbidden-env:
+    enabled: true
+  suspicious-secret:
+    enabled: true
+  readme-local-links:
+    enabled: true
