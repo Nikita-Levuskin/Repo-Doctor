@@ -11,7 +11,7 @@ work/venv/bin/pytest --cov=repo_doctor --cov-report=term-missing --cov-fail-unde
 work/venv/bin/python -m build
 work/venv/bin/python -m twine check dist/*
 python3.12 -m venv work/clean-venv
-work/clean-venv/bin/python -m pip install dist/repo_doctor_levuskin-1.0.0-py3-none-any.whl
+work/clean-venv/bin/python -m pip install dist/repo_doctor-1.0.0-py3-none-any.whl
 work/clean-venv/bin/repo-doctor --version
 work/clean-venv/bin/python -m repo_doctor --version
 repo-doctor scan work/demo-run

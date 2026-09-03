@@ -3,7 +3,7 @@ requires = ["hatchling>=1.25,<1.32"]
 build-backend = "hatchling.build"
 
 [project]
-name = "repo-doctor-levuskin"
+name = "repo-doctor"
 version = "1.0.0"
 description = "CLI utility for auditing and standardizing software repositories"
 readme = "README.md"

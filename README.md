@@ -24,17 +24,6 @@ Repo Doctor — учебная CLI-утилита для рекурсивног�
 
 ## Установка
 
-После публикации релиза в PyPI:
-
-```bash
-pipx install repo-doctor-levuskin
-# или
-uv tool install repo-doctor-levuskin
-```
-
-Имя дистрибутива в PyPI — `repo-doctor-levuskin`, команда после установки —
-`repo-doctor`.
-
 Напрямую из GitHub:
 
 ```bash
@@ -130,8 +119,8 @@ python -m twine check dist/*
 ```
 
 CI выполняет проверки на Linux, macOS и Windows, а также отдельно проверяет Python 3.12
-и 3.13. Workflow релиза собирает wheel/sdist, создаёт GitHub Release и публикует пакет
-в PyPI через Trusted Publishing. Инструкция сопровождающего —
+и 3.13. Workflow релиза собирает wheel/sdist и публикует их в GitHub Release.
+Инструкция сопровождающего —
 [`docs/releasing.md`](docs/releasing.md).
 
 Материалы курсового проекта находятся в каталоге [`docs`](docs/requirements.md). Полный
